@@ -36,3 +36,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   
+
+  // ===================
+  const modal = document.getElementById("blogModal");
+  const modalImage = document.getElementById("modalImage");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalAuthor = document.getElementById("modalAuthor");
+  const modalDate = document.getElementById("modalDate");
+  const modalDescription = document.getElementById("modalDescription");
+
+  document.querySelectorAll(".details-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const card = link.closest(".blog-card");
+
+      modalImage.src = card.querySelector("img").src;
+      modalTitle.textContent = card.querySelector(".blog-title").textContent;
+      modalDescription.textContent =
+        card.querySelector(".blog-desc").textContent;
+
+      modalAuthor.textContent =
+        card.querySelector(".meta span:first-child").textContent;
+      modalDate.textContent =
+        card.querySelector(".meta span:last-child").textContent;
+
+      modal.classList.add("active");
+    });
+  });
+
+  document.querySelector(".modal-close").addEventListener("click", closeModal);
+  document.querySelector(".modal-overlay").addEventListener("click", closeModal);
+
+  function closeModal() {
+    modal.classList.remove("active");
+  }
